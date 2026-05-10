@@ -21,7 +21,7 @@ interface SesionUsuarioCreationAttributes extends InferCreationAttributes<Sesion
   idDocente: number | null;
 }
 
-export class SesionUsuario extends Model<SesionUsuarioAttributes, SesionUsuarioCreationAttributes> {
+class SesionUsuario extends Model<SesionUsuarioAttributes, SesionUsuarioCreationAttributes> {
   declare id: CreationOptional<number>;
   declare idUsuario: number | null;
   declare fechaInicioSesion: CreationOptional<Date>;
@@ -35,12 +35,12 @@ export class SesionUsuario extends Model<SesionUsuarioAttributes, SesionUsuarioC
 SesionUsuario.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
     idUsuario: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
       field: 'id_usuario',
       references: { model: 'usuarios', key: 'id' },
@@ -55,7 +55,7 @@ SesionUsuario.init(
       allowNull: true,
     },
     intentoFallido: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0,
     },
@@ -65,13 +65,13 @@ SesionUsuario.init(
       defaultValue: false,
     },
     idAdministrativo: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
       field: 'id_administrativo',
       references: { model: 'administrativos', key: 'id' },
     },
     idDocente: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
       field: 'id_docente',
       references: { model: 'docentes', key: 'id' },
@@ -83,3 +83,5 @@ SesionUsuario.init(
     timestamps: false,
   }
 );
+
+export default SesionUsuario;

@@ -11,16 +11,16 @@ import sequelize from '../../../config/database/conexion.js';
 interface CorrelatividadAttributes extends InferAttributes<Correlatividad> {
   id: number;
   idPlan: number;
-  idAsignatura: number;
-  idAsignaturaCorrelativa: number;
+  idUnidadCurricular: number;
+  idUnidadCurricularCorrelativa: number;
   condicion: 'REGULARIZADA' | 'APROBADA' | 'PENDIENTE' | 'DESAPROBADA';
 }
 
 interface CorrelatividadCreationAttributes
   extends InferCreationAttributes<Correlatividad> {
   idPlan: number;
-  idAsignatura: number;
-  idAsignaturaCorrelativa: number;
+  idUnidadCurricular: number;
+  idUnidadCurricularCorrelativa: number;
   condicion: 'REGULARIZADA' | 'APROBADA' | 'PENDIENTE' | 'DESAPROBADA';
 }
 
@@ -30,42 +30,42 @@ class Correlatividad extends Model<
 > {
   declare id: CreationOptional<number>;
   declare idPlan: ForeignKey<number>;
-  declare idAsignatura: ForeignKey<number>;
-  declare idAsignaturaCorrelativa: ForeignKey<number>;
+  declare idUnidadCurricular: ForeignKey<number>;
+  declare idUnidadCurricularCorrelativa: ForeignKey<number>;
   declare condicion: 'REGULARIZADA' | 'APROBADA' | 'PENDIENTE' | 'DESAPROBADA';
 }
 
 Correlatividad.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
     idPlan: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: false,
       field: 'id_plan',
       references: {
-        model: 'planes',
+        model: 'planes_estudios',
         key: 'id',
       },
     },
-    idAsignatura: {
-      type: DataTypes.INTEGER.UNSIGNED,
+    idUnidadCurricular: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      field: 'id_asignatura',
+      field: 'id_unidad_curricular',
       references: {
-        model: 'asignaturas',
+        model: 'unidades_curriculares',
         key: 'id',
       },
     },
-    idAsignaturaCorrelativa: {
-      type: DataTypes.INTEGER.UNSIGNED,
+    idUnidadCurricularCorrelativa: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      field: 'id_asignatura_correlativa',
+      field: 'id_unidad_curricular_correlativa',
       references: {
-        model: 'asignaturas',
+        model: 'unidades_curriculares',
         key: 'id',
       },
     },

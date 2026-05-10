@@ -36,7 +36,7 @@ class PlanEstudio extends Model<PlanEstudioAttributes, PlanEstudioCreationAttrib
 PlanEstudio.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },

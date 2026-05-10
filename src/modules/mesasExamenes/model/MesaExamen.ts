@@ -137,13 +137,6 @@ MesaExamen.init(
         sequelize,
         tableName: "mesas_examenes",
         timestamps: true,
-        // Opcional: índices para optimizar consultas
-        indexes: [
-            { fields: ["turno_examen_id"] },
-            { fields: ["unidad_curricular_id"] },
-            { fields: ["fecha"] },
-            { fields: ["id_administrativo"] },
-        ]
     }
 );
 

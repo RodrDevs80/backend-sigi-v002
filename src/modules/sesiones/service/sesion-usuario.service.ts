@@ -1,7 +1,7 @@
 import { AppError } from "../../../core/middlewares/error-handler.middleware.js";
 import { CreateSesionDto } from "../dto/create-sesion.dto.js";
 import { UpdateSesionDto } from "../dto/update-sesion.dto.js";
-import { SesionUsuario } from "../model/sesion-usuario.model.js";
+import SesionUsuario from "../model/sesion-usuario.model.js";
 
 const DEFAULT_PAGE = 1;
 const DEFAULT_LIMIT = 10;

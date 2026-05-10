@@ -2,7 +2,7 @@
 import { AppError } from '../../../core/middlewares/error-handler.middleware.js';
 import { CreateRecuperacionDto } from '../dto/create-recuperacion.dto.js';
 import { UpdateRecuperacionDto } from '../dto/update-recuperacion.dto.js';
-import { RecuperacionContrasenia } from '../model/recuperacion-contrasenia.model.js';
+import RecuperacionContrasenia from '../model/recuperacion-contrasenia.model.js';
 
 
 const DEFAULT_PAGE = 1;

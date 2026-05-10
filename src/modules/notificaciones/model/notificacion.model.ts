@@ -41,22 +41,22 @@ class Notificacion extends Model<NotificacionAttributes, NotificacionCreationAtt
 Notificacion.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
     idEstudiante: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
       references: { model: "estudiantes", key: "id" },
     },
     idDocente: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
       references: { model: "docentes", key: "id" },
     },
     idAdministrativo: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
       references: { model: "administrativos", key: "id" },
     },
@@ -77,7 +77,7 @@ Notificacion.init(
       allowNull: true,
     },
     entidadId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     leida: {

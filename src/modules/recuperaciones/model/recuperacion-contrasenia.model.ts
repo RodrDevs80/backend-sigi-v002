@@ -18,7 +18,7 @@ interface RecuperacionContraseniaCreationAttributes extends InferCreationAttribu
   idDocente: number | null;
 }
 
-export class RecuperacionContrasenia extends Model<RecuperacionContraseniaAttributes, RecuperacionContraseniaCreationAttributes> {
+class RecuperacionContrasenia extends Model<RecuperacionContraseniaAttributes, RecuperacionContraseniaCreationAttributes> {
   declare id: CreationOptional<number>;
   declare idUsuario: number | null;
   declare fechaExpiracion: Date;
@@ -31,12 +31,12 @@ export class RecuperacionContrasenia extends Model<RecuperacionContraseniaAttrib
 RecuperacionContrasenia.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
     idUsuario: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
       field: 'id_usuario',
       references: { model: 'usuarios', key: 'id' },
@@ -55,13 +55,13 @@ RecuperacionContrasenia.init(
       allowNull: true,
     },
     idAdministrativo: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
       field: 'id_administrativo',
       references: { model: 'administrativos', key: 'id' },
     },
     idDocente: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
       field: 'id_docente',
       references: { model: 'docentes', key: 'id' },
@@ -73,3 +73,5 @@ RecuperacionContrasenia.init(
     timestamps: false,
   }
 );
+
+export default RecuperacionContrasenia;
