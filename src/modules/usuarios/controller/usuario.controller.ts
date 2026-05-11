@@ -2,24 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 import { usuarioService } from '../service/usuario.service.js';
 import { CreateUsuarioDto } from '../dto/create-usuario.dto.js';
 import { UpdateUsuarioDto } from '../dto/update-usuario.dto.js';
-import type { ZodError } from 'zod';
+import { parsePagination } from '../../../helpers/parsePagination.js';
+import { respondZodError } from '../../../helpers/respondZodError.js';
 
-function respondZodError(res: Response, error: ZodError): void {
-  res.status(400).json({
-    status: 'error',
-    message: 'Datos de entrada inválidos.',
-    errors: error.flatten().fieldErrors,
-  });
-}
-
-function parsePagination(query: any) {
-  const page = parseInt(query.page, 10) || 1;
-  const limit = parseInt(query.limit, 10) || 10;
-  return {
-    page: Math.max(1, page),
-    limit: Math.max(1, Math.min(100, limit)),
-  };
-}
 
 export const usuarioController = {
 
@@ -54,7 +39,8 @@ export const usuarioController = {
       const parsed = CreateUsuarioDto.safeParse(req.body);
       if (!parsed.success) return respondZodError(res, parsed.error);
       const nuevo = await usuarioService.create(parsed.data);
-      res.status(201).json({ status: 'success', data: nuevo });
+      const respuesta = { id: nuevo.id, nombre: nuevo.nombre, apellido: nuevo.apellido, email: nuevo.email, activo: nuevo.activo };
+      res.status(201).json({ status: 'success', data: respuesta });
     } catch (err) {
       next(err);
     }
@@ -65,7 +51,7 @@ export const usuarioController = {
       const id = parseInt(req.params.id as string);
       const parsed = UpdateUsuarioDto.safeParse(req.body);
       if (!parsed.success) return respondZodError(res, parsed.error);
-      
+
       const actualizado = await usuarioService.update(id, parsed.data);
       if (!actualizado) {
         return res.status(404).json({ status: 'error', message: 'Usuario no encontrado.' });

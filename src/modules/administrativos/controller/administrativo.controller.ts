@@ -13,6 +13,7 @@ export const administrativoController = {
     try {
       const { page, limit } = parsePagination(req.query);
       const result = await administrativoService.getAll(page, limit);
+      console.log(result)
       res.status(200).json({ status: 'success', ...result });
     } catch (err) {
       next(err);
@@ -50,10 +51,11 @@ export const administrativoController = {
         return respondZodError(res, parsed.error);
       }
       const nuevo = await administrativoService.create(parsed.data);
+      const respuesta = { id: nuevo.id, nomnbre: nuevo.nombre, apellido: nuevo.apellido, email: nuevo.email, dni: nuevo.dni, idRol: nuevo.idRol, telefono: nuevo.telefono, domicilio: nuevo.domicilio, activo: nuevo.activo }
       res
         .status(201)
         .location(`/api/v1/administrativos/${nuevo.id}`)
-        .json({ status: 'success', data: nuevo });
+        .json({ status: 'success', data: respuesta });
     } catch (err) {
       next(err);
     }

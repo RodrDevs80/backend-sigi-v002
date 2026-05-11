@@ -13,6 +13,7 @@ export const usuarioService = {
       limit,
       offset,
       order: [['id', 'ASC']],
+      attributes: { exclude: ['contrasenia'] }
     });
 
     return {
